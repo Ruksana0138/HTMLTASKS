@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Contact Form </title>
+</head>
+<body>
+<form>
+
+<label> Name: </label><br>
+<input type="text" 
+         name="name" 
+        placeholder="Your Name" 
+        maxlength= "30"
+        required><br><br>
+
+<label> Email: </label><br>
+<input type="text" 
+        name="email" 
+        placeholder=" Your Email" 
+        required><br><br>
+
+
+<label> Phone: </label><br>
+<input type="number"
+       name="phone" 
+       placeholder="Your Phone Number" 
+       pattern="[0-9]{10}" 
+       required><br><br>
+
+<label> Message: </label><br>
+<textarea name="message"
+         maxlength="200"
+         rows="10"
+         cols="30"
+         placeholder="write your message here...." 
+         required></textarea><br><br>
+        
+
+<button type="submit" > send </button>
+
+
+</form>
+</body>
+</html>
