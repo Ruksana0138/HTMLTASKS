@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .input-section {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 5px;
+      width: 200px;
+    }
+
+    
+    .add-btn {
+      background-color: purple;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+   
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 300px;
+      margin: auto;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f4f4f4;
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+
+    
+  </style>
+</head>
+
+<body>
+
+<script>
+  
+  var title = document.createElement("h1");
+  title.innerText = "To-Do List";
+  document.body.append(title);
+
+ 
+  var inputSection = document.createElement("div");
+  inputSection.className = "input-section";
+
+  var input = document.createElement("input");
+  input.placeholder = "Create your task here...";
+
+  var addbtn = document.createElement("button");
+  addbtn.innerText = "Add";
+  addbtn.className = "add-btn";
+
+  inputSection.append(input);
+  inputSection.append(addbtn);
+  document.body.append(inputSection);
+
+  
+  var ul = document.createElement("ul");
+  document.body.append(ul);
+
+  
+  addbtn.onclick = function () {
+    var value = input.value.trim();
+
+    if (value === "") {
+      alert("Please enter a task");
+      return;
+    }
+
+    var listitem = document.createElement("li");
+
+    var textSpan = document.createElement("span");
+    textSpan.innerText = value;
+
+    
+    var buttonContainer = document.createElement("div");
+    buttonContainer.className = "btn-group";
+
+    
+    var editbtn = document.createElement("button");
+    editbtn.innerText = "Edit";
+    editbtn.onclick = edititem;
+
+    
+    var delbtn = document.createElement("button");
+    delbtn.innerText = "Delete";
+    delbtn.onclick = deleteitem;
+
+    
+    buttonContainer.append(editbtn);
+    buttonContainer.append(delbtn);
+
+    
+    listitem.append(textSpan);
+    listitem.append(buttonContainer);
+
+    ul.append(listitem);
+
+  
+    input.value = "";
+  };
+
+  
+  function deleteitem(event) {
+    event.target.parentElement.parentElement.remove();
+  }
+
+  
+  function edititem(event) {
+    var li = event.target.parentElement.parentElement;
+    var span = li.firstChild;
+
+    var newtext = prompt("Edit Task", span.innerText);
+
+    if (newtext !== null && newtext.trim() !== "") {
+      span.innerText = newtext;
+    }
+  }
+</script>
+
+</body>
+</html>
