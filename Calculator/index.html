@@ -73,7 +73,11 @@
     .clear {
       background: red;
       color: white;
-      grid-column: span 2;
+    }
+
+    .delete {
+      background: #555;
+      color: white;
     }
   </style>
 </head>
@@ -85,6 +89,7 @@
 
   <div class="buttons">
     <button class="clear" onclick="clearDisplay()">C</button>
+    <button class="delete" onclick="deleteLast()">⌫</button>
     <button class="operator" onclick="appendValue('/')">÷</button>
     <button class="operator" onclick="appendValue('*')">×</button>
 
@@ -112,7 +117,6 @@
 
 let display = document.getElementById("display");
 
-
 function appendValue(value) {
   if (display.innerText === "0") {
     display.innerText = value;
@@ -127,11 +131,21 @@ function clearDisplay() {
 }
 
 
+function deleteLast() {
+  let current = display.innerText;
+
+  if (current.length === 1) {
+    display.innerText = "0";
+  } else {
+    display.innerText = current.slice(0, -1);
+  }
+}
+
+
 function calculate() {
   try {
     let expression = display.innerText;
 
-    
     expression = expression.replace(/×/g, '*').replace(/÷/g, '/');
 
     let result = eval(expression);
