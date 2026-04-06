@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Calculator</title>
+  <title>Advanced Calculator</title>
 
   <style>
     body {
@@ -18,7 +18,7 @@
       background: #222;
       padding: 20px;
       border-radius: 10px;
-      width: 280px;
+      width: 300px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
@@ -47,6 +47,10 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.85;
     }
 
     .number {
@@ -113,6 +117,7 @@
 
 let display = document.getElementById("display");
 
+/* Append value */
 function appendValue(value) {
   if (display.innerText === "0") {
     display.innerText = value;
@@ -121,12 +126,12 @@ function appendValue(value) {
   }
 }
 
-
+/* Clear */
 function clearDisplay() {
   display.innerText = "0";
 }
 
-
+/* Delete */
 function deleteLast() {
   let current = display.innerText;
 
@@ -137,16 +142,37 @@ function deleteLast() {
   }
 }
 
+/* REAL calculator percentage logic */
+function handlePercentage(expression) {
+  return expression.replace(
+    /(\d+(\.\d+)?)([+\-*/])(\d+(\.\d+)?)%/g,
+    (match, num1, _, operator, num2) => {
+      num1 = parseFloat(num1);
+      num2 = parseFloat(num2);
 
+      let percentValue;
+
+      if (operator === '+' || operator === '-') {
+        percentValue = (num1 * num2) / 100;
+      } else {
+        percentValue = num2 / 100;
+      }
+
+      return `${num1}${operator}${percentValue}`;
+    }
+  );
+}
+
+/* Calculate */
 function calculate() {
   try {
     let expression = display.innerText;
 
-    
     expression = expression
       .replace(/×/g, '*')
-      .replace(/÷/g, '/')
-      .replace(/%/g, '/100'); 
+      .replace(/÷/g, '/');
+
+    expression = handlePercentage(expression);
 
     let result = eval(expression);
 
