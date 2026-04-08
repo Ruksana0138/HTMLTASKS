@@ -12,7 +12,7 @@ function deleteLast() {
   display.value = display.value.slice(0, -1);
 }
 
-// REAL CALCULATOR % LOGIC
+
 function percentage() {
   let exp = display.value;
 
